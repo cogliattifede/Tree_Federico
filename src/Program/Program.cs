@@ -7,24 +7,29 @@ namespace Program
     {
         static void Main(string[] args)
         {
-            Node n1 = new Node(1);
-            Node n2 = new Node(2);
-            Node n3 = new Node(3);
-            Node n4 = new Node(4);
-            Node n5 = new Node(5);
-            Node n6 = new Node(6);
-            Node n7 = new Node(7);
+            Node<Person> abuelo = new Node<Person>(new Person("Abuelo", 83));
+            Node<Person> abuela = new Node<Person>(new Person("Abuela", 80));
+            Node<Person> padre = new Node<Person>(new Person("Padre", 51));
+            Node<Person> madre = new Node<Person>(new Person("Madre", 50));
+            Node<Person> mayor = new Node<Person>(new Person("Mayor", 27));
+            Node<Person> medio = new Node<Person>(new Person("Medio", 21));
+            Node<Person> menor = new Node<Person>(new Person("Abuelo", 13));
+            
+            abuelo.AddChildren(padre);
+            abuelo.AddChildren(madre);
+            padre.AddChildren(mayor);
+            padre.AddChildren(medio);
+            madre.AddChildren(menor);
 
-            n1.AddChildren(n2);
-            n1.AddChildren(n3);
+            MaximaEdadVisitor maximaEdad = new MaximaEdadVisitor();
+            abuelo.Accept(maximaEdad);
 
-            n2.AddChildren(n4);
-            n2.AddChildren(n5);
+            SumarEdadVisitor sumarEdad = new SumarEdadVisitor();
+            abuelo.Accept(sumarEdad);
 
-            n3.AddChildren(n6);
-            n3.AddChildren(n7);
+            NombreMasLargoVisitor nombreLargo = new NombreMasLargoVisitor();
+            abuelo.Accept(nombreLargo);
 
-            // visitar el árbol aquí
         }
     }
 }
